@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery@3.6.0",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "jquery-validate@1.19.3",
+      "destination": "wwwroot/lib/jquery-validation/"
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.12",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "bootstrap@5.1.1",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "font-awesome@5.15.4",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "datatables.net@1.11.3",
+      "destination": "wwwroot/lib/datatables/"
+    },
+    {
+      "library": "Chart.js@3.5.1",
+      "destination": "wwwroot/lib/chartjs/"
+    }
+  ]
+}

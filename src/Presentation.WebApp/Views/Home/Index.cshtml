@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@{
+    //var productos = (List<Tuple<string, int>>)ViewBag.Productos;
+    //var citas = (List<Tuple<string, int>>)ViewBag.Citas;
+}
+
+<div class="row">
+    <div class="col">
+        <canvas id="Chart1" class="my-4 w-100 chartjs"></canvas>
+    </div>
+    <div class="col">
+        <canvas id="Chart2" class="my-4 w-100 chartjs"></canvas>
+    </div>
+</div>
+
+@section Styles{
+    <style>
+        .chartjs {
+            max-height: 600px;
+            display: block;
+        }
+    </style>
+}
+
+@section scripts {
+    <!--https://www.chartjs.org/-->
+    <script src="//cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        //https://www.chartjs.org/
+        new Chart(
+            document.getElementById('Chart1'),
+            {
+                type: 'doughnut',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", ViewBag.Chart1Labels))],
+                    datasets: [{
+                        label: 'Por cantidad',
+                        hoverOffset: 4,
+                        backgroundColor: interpolateColors(@(((List<string>)ViewBag.Chart1Labels).Count())),
+                        data: [@string.Join(",", ViewBag.Chart1Data)]
+                    }]
+                },
+                options: {
+                    responsive: true, aspectRatio: 2, maintainAspectRatio: true
+                }
+            }
+        );
+        new Chart(
+            document.getElementById('Chart2'),
+            {
+                type: 'bar',
+                data: {
+                    labels: [@Html.Raw(string.Join(",", ViewBag.Chart2Labels))],
+                    datasets: [{
+                        label: 'Por fecha',
+                        backgroundColor: interpolateColors(@(((List<string>)ViewBag.Chart2Labels).Count())),
+                        data: [@string.Join(",", ViewBag.Chart2Data)]
+                    }]
+                },
+                options: {
+                    responsive: true, aspectRatio: 2, maintainAspectRatio: true, scales: { y: { ticks: { stepSize: 1 } } }
+
+                }
+            }
+        );
+    </script>
+}
+

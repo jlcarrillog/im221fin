@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="es-mx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>@ViewData["Title"]</title>
+
+    <meta name="theme-color" content="#7952b3">
+
+    <link href="//cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="//pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+    <!--https://getbootstrap.com/docs/5.1/examples/sidebars/-->
+    <div id="body">
+
+        <header class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 256px;">
+            <nav>
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-4">UNITEC</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li><a asp-controller="Home" asp-action="Index" class="nav-link text-white">Dashboard</a></li>
+                </ul>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Productos" asp-action="Index" class="nav-link text-white">Productos</a></li>
+                    }
+                    <li><a asp-controller="Pacientes" asp-action="Index" class="nav-link text-white">Pacientes</a></li>
+                    <li><a asp-controller="Citas" asp-action="Index" class="nav-link text-white">Citas</a></li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Doctores" asp-action="Index" class="nav-link text-white">Doctores</a></li>
+                        <li><a asp-controller="Pagos" asp-action="Index" class="nav-link text-white">Pagos</a></li>
+                    }
+                </ul>
+                <hr>
+                <partial name="_LoginPartial" />
+            </nav>
+        </header>
+        <main class="flex-fill">
+            <div class="px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">@ViewData["Title"]</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div id="btn-toolbar" class="btn-group">
+
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    @RenderBody()
+                </div>
+                <!--https://getbootstrap.com/docs/5.1/examples/footers/-->
+                <footer class="d-flex flex-wrap justify-content-between align-items-center my-4 border-top">
+                    <p class="col-md-4 mb-0 text-muted">© 2021 Company, Inc</p>
+
+                    <a href="/"
+                       class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <svg class="bi me-2" width="40" height="32">
+                            <use xlink:href="#bootstrap"></use>
+                        </svg>
+                    </a>
+
+                    <ul class="nav col-md-4 justify-content-end">
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+                    </ul>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Detalles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="detallesModalContent" class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
